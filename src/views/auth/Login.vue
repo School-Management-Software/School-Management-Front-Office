@@ -63,7 +63,6 @@ export default {
           email: this.email,
           password: this.password
         })
-        console.log(response.data.token);
         this.$store.commit('setToken', response.data.token)
         this.$router.push('/')
       } catch (error) {

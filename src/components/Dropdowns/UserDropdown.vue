@@ -36,7 +36,7 @@
       <a
         href="javascript:void(0);"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-        @click="logout"
+        @click="handleLogout"
       >
         logout
       </a>
@@ -46,7 +46,6 @@
 
 <script>
 import { createPopper } from "@popperjs/core";
-import { mapActions } from 'vuex';
 
 import image from "@/assets/logo.png";
 
@@ -69,9 +68,8 @@ export default {
         });
       }
     },
-    ...mapActions(['logout']),
     handleLogout() {
-      this.logout(this.$router);
+      this.$store.dispatch('logout', this.$router);
     }
   },
 };

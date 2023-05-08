@@ -18,10 +18,8 @@ const routes = [
                 component: Dashboard,
                 beforeEnter: (to, from, next) => {
                     if (store.state.token) {
-                      // if token exists, allow access to the route
                       next();
                     } else {
-                      // if token does not exist, redirect to login page
                       next("/auth/login");
                     }
                   },

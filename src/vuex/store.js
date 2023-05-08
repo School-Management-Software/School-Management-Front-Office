@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-import { router } from '@/router/index'
 const store = createStore({
   state: {
     token: localStorage.getItem('token') || null,
@@ -14,9 +13,9 @@ const store = createStore({
     },
   },
   actions: {
-    logout({ commit }) {
-      commit('clearToken'); // clear the token in state
-      localStorage.removeItem('token'); // remove the token from local storage
+    logout({ commit }, router) {
+      commit('clearToken');
+      localStorage.removeItem('token');
       router.push('/auth/login');
     },
   }
