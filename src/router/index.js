@@ -5,6 +5,7 @@ import Dashboard from "@/views/admin/Dashboard.vue";
 import LoginView from "@/views/auth/Login.vue";
 import RolesView from "@/views/admin/Roles/Index.vue";
 import AdminUsersView from "@/views/admin/AdminUsers/Index.vue";
+import ProfileView from "@/views/admin/Profile/Index.vue";
 
 import store from '@/vuex/store';
 
@@ -41,6 +42,20 @@ const routes = [
           {
             path: "/admin/adminUsers/list",
             component: AdminUsersView,
+            beforeEnter: (to, from, next) => {
+                if (store.state.token) {
+                  // if token exists, allow access to the route
+                  next();
+                } else {
+                  // if token does not exist, redirect to login page
+                  next("/auth/login");
+                }
+              },
+          },
+
+          {
+            path: "/admin/profile",
+            component: ProfileView,
             beforeEnter: (to, from, next) => {
                 if (store.state.token) {
                   // if token exists, allow access to the route
