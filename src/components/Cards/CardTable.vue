@@ -59,7 +59,7 @@
               <span v-html="item[column.field]"></span>
             </td>
             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-              <table-dropdown :id="item.id"/>
+              <table-dropdown :id="item.id" :actions="actions"/>
             </td>
           </tr>
         </tbody>
@@ -93,6 +93,7 @@
       data: Array,
       isLoading: Boolean,
       isAnError: Boolean,
+      actions: Array,
       color: {
         default: "light",
         validator: function (value) {

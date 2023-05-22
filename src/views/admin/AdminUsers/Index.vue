@@ -1,12 +1,13 @@
 <template>
-    <div class="flex flex-wrap mt-4">
+    <div class="flex flex-wrap -mt-24">
       <div class="w-full mb-12 px-4">
         <card-table 
           :title="title"
           :columns="columns"
           :data="data"
           :isAnError="this.isAnError"
-          :isLoading="isLoading"/>
+          :isLoading="isLoading"
+          :actions="actions"/>
       </div>
       <!-- <div class="w-full mb-12 px-4">
         <card-table color="dark" />
@@ -16,6 +17,7 @@
   <script>
   import CardTable from "@/components/Cards/CardTable.vue";
   import { mapGetters } from 'vuex';
+  // import { isProxy, toRaw } from 'vue';
   
   export default {
     name: 'CountriesView',
@@ -25,6 +27,10 @@
         isLoading: true,
         data: [],
         columns: [],
+        actions: [
+          { label: 'Delete', handler: this.handleDelete },
+          { label: 'Update', handler: null, url: "/" },
+        ]
       };
     },
     components: {
@@ -73,6 +79,41 @@
             }
 
             this.isLoading = false;
+        },
+
+        handleDelete(id) {
+          console.log("argument argument","id", id);
+          // if (isProxy(argument)){
+              // argument = toRaw(argument)
+              // console.log("delete 1 event", argument.id);
+
+              this.$swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  const payload = {
+                    URL: 'adminUsers/delete/',
+                    ID: id,
+                  };
+                  this.$store.dispatch('deleteData', payload)
+                  this.$swal(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                  )
+                  // this.$forceUpdate()
+                }
+              })
+            // }
+        },
+        handleUpdate() {
+          console.log("update event");
         }
     }
   };

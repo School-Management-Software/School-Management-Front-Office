@@ -16,20 +16,9 @@
         block: dropdownPopoverShow,
       }"
     >
-      <a @click="deleteItem(id)"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700 cursor-pointer"
-      >
-        Delete
-      </a>
-      <a href="javascript:void(0);"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700 cursor-pointer"
-      >
-        Another action
-      </a>
-      <a href="javascript:void(0);"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700 cursor-pointer"
-      >
-        Something else here
+      <a  v-for="action in actions" :key="action.label" @click="action.handler ? handleAction(action, id) : null"  :href="action.url ?action.url : null"
+        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700 cursor-pointer">
+          {{ action.label }}
       </a>
     </div>
   </div>
@@ -43,31 +32,20 @@ export default {
       dropdownPopoverShow: false,
     };
   },
+  props: {
+    id: String,
+    actions: Array,
+  },
   methods: {
-    deleteItem(id) {
-      this.$swal({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const payload = {
-            URL: 'adminUsers/delete/',
-            ID: id,
-          };
-          this.$store.dispatch('deleteData', payload)
-          this.$swal(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
-          // this.$forceUpdate()
+    handleAction(action, id) {
+      if(action.handler){
+        if (action.argument) {
+          console.log("arg",action.argument);
+          action.handler(action.argument, id);
+        } else {
+          action.handler(id);
         }
-      })
+      }
     },
     toggleDropdown: function (event) {
       event.preventDefault();
@@ -81,8 +59,6 @@ export default {
       }
     },
   },
-  props: {
-      id: String,
-    },
+  
 };
 </script>
