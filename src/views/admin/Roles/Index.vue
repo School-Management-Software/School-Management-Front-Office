@@ -43,7 +43,7 @@ export default {
   methods: {
 
     async getRoles(){
-      await this.$store.dispatch('fetchData', process.env.VUE_APP_API_BASE+'roles/getAll')
+      await this.$store.dispatch('fetchData', 'roles/getAll')
       
         if(this.isAnError == false){
           let newData = this.dataArray.map((item) => ({ 

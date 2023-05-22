@@ -41,7 +41,7 @@
     },
     methods: {
         async getAdminUsers(){
-          await this.$store.dispatch('fetchData', process.env.VUE_APP_API_BASE+'adminUsers/list')
+          await this.$store.dispatch('fetchData', 'adminUsers/list')
           
             if(this.isAnError == false){
               let newData = this.dataArray.map((item) => ({ 
@@ -49,8 +49,8 @@
                 email: `<span class="font-bold">${item.email}</span>` ,
                 is_active: item.is_active == 1 ? `<i class="fas fa-circle text-green-500 mr-2"></i> Active` : `<i class="fas fa-circle text-orange-500 mr-2"></i> Inactive`,
                 is_admin: item.is_admin ,
-                cin: item.profile.cin ,
-                birthday: item.profile.birthday ,
+                cin: item.profile ? item.profile.cin : "" ,
+                birthday: item.profile ? item.profile.birthday : "" ,
                 roles: item.roles.map((role) => `<span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-600/20 mr-1">${role.name}</span>`),
                 })
               );

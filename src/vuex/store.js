@@ -11,6 +11,9 @@ const store = createStore({
     SET_DATA(state, data) {
       state.data = data;
     },
+    REMOVE_ITEM(state, id) {
+      state.data = state.data.filter(item => item.id !== id)
+    },
     isAnError(state, data){
       state.isAnError = data;
 
@@ -26,7 +29,7 @@ const store = createStore({
   actions: {
     async fetchData({ commit, state }, URL) {
       try {
-          await axios.get(URL, {
+          await axios.get(process.env.VUE_APP_API_BASE+URL, {
               headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ' + state.token,
@@ -46,6 +49,29 @@ const store = createStore({
       } catch (error) {
           console.error(error);
               commit('isAnError', true)
+
+      }
+    },
+    async deleteData({commit, state }, {URL, ID}) {
+      try {
+        console.log(process.env.VUE_APP_API_BASE + URL+ID);
+        console.log(state);
+          await axios.delete(process.env.VUE_APP_API_BASE + URL + ID , {
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + state.token,
+              },
+          })
+          .then(response => {
+              console.log("delete data !!!!",response);
+              commit('REMOVE_ITEM', ID)
+          })
+          .catch(function (error) {
+              console.error(error);
+          });
+
+      } catch (error) {
+          console.error(error);
 
       }
     },

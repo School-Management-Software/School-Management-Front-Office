@@ -16,7 +16,7 @@
         block: dropdownPopoverShow,
       }"
     >
-      <a @click="showAlert"
+      <a @click="deleteItem(id)"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700 cursor-pointer"
       >
         Delete
@@ -44,7 +44,7 @@ export default {
     };
   },
   methods: {
-    showAlert() {
+    deleteItem(id) {
       this.$swal({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -55,12 +55,17 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log("deleted");
+          const payload = {
+            URL: 'adminUsers/delete/',
+            ID: id,
+          };
+          this.$store.dispatch('deleteData', payload)
           this.$swal(
             'Deleted!',
             'Your file has been deleted.',
             'success'
           )
+          // this.$forceUpdate()
         }
       })
     },
@@ -76,5 +81,8 @@ export default {
       }
     },
   },
+  props: {
+      id: String,
+    },
 };
 </script>
