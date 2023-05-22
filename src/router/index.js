@@ -3,7 +3,7 @@ import Admin from "@/layouts/Admin.vue";
 import Auth from "@/layouts/Auth.vue";
 import Dashboard from "@/views/admin/Dashboard.vue";
 import LoginView from "@/views/auth/Login.vue";
-import CountriesView from "@/views/admin/Countries/Index.vue";
+import RolesView from "@/views/admin/Roles/Index.vue";
 import AdminUsersView from "@/views/admin/AdminUsers/Index.vue";
 
 import store from '@/vuex/store';
@@ -26,8 +26,8 @@ const routes = [
                 },
           },
           {
-            path: "/admin/countries",
-            component: CountriesView,
+            path: "/admin/roles/list",
+            component: RolesView,
             beforeEnter: (to, from, next) => {
                 if (store.state.token) {
                   // if token exists, allow access to the route

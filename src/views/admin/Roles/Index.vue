@@ -19,7 +19,7 @@ import { mapGetters } from 'vuex';
 
 
 export default {
-  name: 'CountriesView',
+  name: 'RolesView',
   data() {
     return {
       title: "List Of Roles",
