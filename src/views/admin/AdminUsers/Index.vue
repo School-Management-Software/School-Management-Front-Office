@@ -5,6 +5,7 @@
           :title="title"
           :columns="columns"
           :data="data"
+          :storeURL="storeURL"
           :isAnError="this.isAnError"
           :isLoading="isLoading"
           :actions="actions"/>
@@ -24,6 +25,7 @@
     data() {
       return {
         title: "Admin Users",
+        storeURL: "/admin/adminUsers/store",
         isLoading: true,
         data: [],
         columns: [],

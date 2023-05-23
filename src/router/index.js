@@ -4,11 +4,17 @@ import Auth from "@/layouts/Auth.vue";
 import Dashboard from "@/views/admin/Dashboard.vue";
 import LoginView from "@/views/auth/Login.vue";
 
-import RolesView from "@/views/admin/Roles/Index.vue";
-
 import ListAdminUsersView from "@/views/admin/AdminUsers/Index.vue";
 import EditAdminUsersView from "@/views/admin/AdminUsers/Edit.vue";
 import StoreAdminUsersView from "@/views/admin/AdminUsers/Store.vue";
+
+import RolesView from "@/views/admin/Roles/Index.vue";
+
+import ListPermissionsView from "@/views/admin/Permissions/Index.vue";
+
+import ListPlansView from "@/views/admin/Plans/Index.vue";
+
+import ListOptionsView from "@/views/admin/Options/Index.vue";
 
 import ProfileView from "@/views/admin/Profile/Index.vue";
 
@@ -30,23 +36,6 @@ const routes = [
                     next("/auth/login");
                   }
                 },
-          },
-          {
-            path: "/admin/roles",
-            redirect: "/admin/roles/list",
-            children: [
-              {
-                path: "/admin/roles/list",
-                component: RolesView,
-                beforeEnter: (to, from, next) => {
-                    if (store.state.token) {
-                      next();
-                    } else {
-                      next("/auth/login");
-                    }
-                  },
-              },
-            ]
           },
           {
             path: "/admin/adminUsers",
@@ -77,6 +66,76 @@ const routes = [
               {
                 path: "/admin/adminUsers/store",
                 component: StoreAdminUsersView,
+                beforeEnter: (to, from, next) => {
+                    if (store.state.token) {
+                      next();
+                    } else {
+                      next("/auth/login");
+                    }
+                  },
+              },
+            ]
+          },
+          {
+            path: "/admin/roles",
+            redirect: "/admin/roles/list",
+            children: [
+              {
+                path: "/admin/roles/list",
+                component: RolesView,
+                beforeEnter: (to, from, next) => {
+                    if (store.state.token) {
+                      next();
+                    } else {
+                      next("/auth/login");
+                    }
+                  },
+              },
+            ]
+          },
+          {
+            path: "/admin/permissions",
+            redirect: "/admin/permissions/list",
+            children: [
+              {
+                path: "/admin/permissions/list",
+                component: ListPermissionsView,
+                beforeEnter: (to, from, next) => {
+                    if (store.state.token) {
+                      next();
+                    } else {
+                      next("/auth/login");
+                    }
+                  },
+              },
+            ]
+          },
+
+          {
+            path: "/admin/plans",
+            redirect: "/admin/plans/list",
+            children: [
+              {
+                path: "/admin/plans/list",
+                component: ListPlansView,
+                beforeEnter: (to, from, next) => {
+                    if (store.state.token) {
+                      next();
+                    } else {
+                      next("/auth/login");
+                    }
+                  },
+              },
+            ]
+          },
+
+          {
+            path: "/admin/options",
+            redirect: "/admin/options/list",
+            children: [
+              {
+                path: "/admin/options/list",
+                component: ListOptionsView,
                 beforeEnter: (to, from, next) => {
                     if (store.state.token) {
                       next();

@@ -169,7 +169,7 @@
           </li>
           <li class="items-center">
             <router-link
-              to="/admin/roles/list"
+              to="/admin/permissions/list"
               v-slot="{ href, navigate, isActive }"
             >
               <a
@@ -187,6 +187,65 @@
                   :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
                 ></i>
                 Permissions
+              </a>
+            </router-link>
+          </li>
+        </ul>
+
+        <!-- Divider -->
+        <hr class="my-4 md:min-w-full" />
+        <!-- Heading -->
+        <h6
+          class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+        >
+          Plans And Options
+        </h6>
+        <!-- Navigation -->
+
+        <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+          <li class="items-center">
+            <router-link
+              to="/admin/plans/list"
+              v-slot="{ href, navigate, isActive }"
+            >
+              <a
+                :href="href"
+                @click="navigate"
+                class="text-xs uppercase py-3 font-bold block"
+                :class="[
+                  isActive
+                    ? 'text-emerald-500 hover:text-emerald-600'
+                    : 'text-blueGray-700 hover:text-blueGray-500',
+                ]"
+              >
+                <i
+                  class="fas fa-tools mr-2 text-sm"
+                  :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
+                ></i>
+                Plans
+              </a>
+            </router-link>
+          </li>
+          <li class="items-center">
+            <router-link
+              to="/admin/options/list"
+              v-slot="{ href, navigate, isActive }"
+            >
+              <a
+                :href="href"
+                @click="navigate"
+                class="text-xs uppercase py-3 font-bold block"
+                :class="[
+                  isActive
+                    ? 'text-emerald-500 hover:text-emerald-600'
+                    : 'text-blueGray-700 hover:text-blueGray-500',
+                ]"
+              >
+                <i
+                  class="fas fa-tools mr-2 text-sm"
+                  :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
+                ></i>
+                Options
               </a>
             </router-link>
           </li>

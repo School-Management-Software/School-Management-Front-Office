@@ -5,6 +5,8 @@
           :title="title"
           :columns="columns"
           :data="data"
+          :actions="actions"
+          :storeURL="storeURL"
           :isAnError="this.isAnError"
           :isLoading="isLoading"/>
     </div>
@@ -23,9 +25,13 @@ export default {
   data() {
     return {
       title: "List Of Roles",
+      storeURL: "/admin/adminUsers/store",
       isLoading: true,
       data: [],
       columns: [],
+      actions: [
+          { label: 'Update', handler: null, url: "/admin/adminUsers/edit" },
+        ]
     };
   },
   components: {
@@ -59,7 +65,6 @@ export default {
             {label : "id", field : "id"},
             {label : "name", field : "name"},
             {label : "created_at", field : "created_at"},
-            {label : "action", field : "action"},
           ]
 
           this.isLoading = false;

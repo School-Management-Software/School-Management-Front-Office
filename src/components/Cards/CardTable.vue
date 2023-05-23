@@ -6,9 +6,9 @@
         <h3 class="font-semibold text-lg" :class="[color === 'light' ? 'text-blueGray-700' : 'text-white']">
           {{ title }}
         </h3>
-        <button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button"> 
-          Add New User Admin 
-        </button>
+        <a :href="storeURL" class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"> 
+          Add
+        </a>
       </div>
     </div>
     <div v-if="isLoading" class="h-40 bg-gray-100 inline-flex items-center justify-center">
@@ -95,6 +95,7 @@
       isLoading: Boolean,
       isAnError: Boolean,
       actions: Array,
+      storeURL: String,
       color: {
         default: "light",
         validator: function (value) {
