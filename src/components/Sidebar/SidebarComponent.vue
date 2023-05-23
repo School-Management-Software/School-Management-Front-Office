@@ -208,9 +208,23 @@
             <router-link
               class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
               to="/admin/profile"
-            >
-              <i class="fas fa-user-circle text-blueGray-300 mr-2 text-sm"></i>
-              Profile Page
+              v-slot="{ href, navigate, isActive }">
+              <a
+                :href="href"
+                @click="navigate"
+                class=""
+                :class="[
+                  isActive
+                    ? 'text-emerald-500 hover:text-emerald-600'
+                    : 'text-blueGray-700 hover:text-blueGray-500',
+                ]"
+              >
+                <i
+                  class="fas fa-user-circle text-blueGray-300 mr-2 text-sm"
+                  :class="[isActive ? 'opacity-75' : 'text-blueGray-300']"
+                ></i>
+                Profile Page
+              </a>
             </router-link>
           </li>
         </ul>
@@ -218,7 +232,6 @@
     </div>
   </nav>
 </template>
-); }
 
 <script>
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.vue";

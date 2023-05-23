@@ -20,7 +20,7 @@
   // import { isProxy, toRaw } from 'vue';
   
   export default {
-    name: 'CountriesView',
+    name: 'ListAdminUsersView',
     data() {
       return {
         title: "Admin Users",
@@ -29,7 +29,7 @@
         columns: [],
         actions: [
           { label: 'Delete', handler: this.handleDelete },
-          { label: 'Update', handler: null, url: "/" },
+          { label: 'Update', handler: null, url: "/admin/adminUsers/edit" },
         ]
       };
     },
