@@ -109,14 +109,11 @@
                     'Your file has been deleted.',
                     'success'
                   )
-                  // this.$forceUpdate()
+                  window.location.reload();
                 }
               })
             // }
         },
-        handleUpdate() {
-          console.log("update event");
-        }
     }
   };
   </script>

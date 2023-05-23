@@ -27,6 +27,7 @@ export default {
       data: [],
       columns: [],
       actions: [
+          { label: 'Delete', handler: this.handleDelete },
           { label: 'Update', handler: null, url: "/admin/adminUsers/edit" },
         ]
     };
@@ -41,11 +42,11 @@ export default {
     },
   },
   mounted() {
-    this.getRoles()
+    this.getPlans()
   },
   methods: {
 
-    async getRoles(){
+    async getPlans(){
       await this.$store.dispatch('fetchData', 'plans/list')
       
         if(this.isAnError == false){
@@ -78,7 +79,33 @@ export default {
         }
 
         this.isLoading = false;
-    }
+    },
+    handleDelete(id) {
+          console.log("argument argument","id", id);
+              this.$swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  const payload = {
+                    URL: 'plans/deleteOne/',
+                    ID: id,
+                  };
+                  this.$store.dispatch('deleteData', payload)
+                  this.$swal(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                  )
+                  window.location.reload();
+                }
+              })
+        },
   }
 };
 </script>
