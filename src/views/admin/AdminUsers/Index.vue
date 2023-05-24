@@ -49,7 +49,7 @@
     },
     methods: {
         async getAdminUsers(){
-          await this.$store.dispatch('fetchData', 'adminUsers/list')
+          await this.$store.dispatch('fetchData', 'admin/adminUsers/list')
           
             if(this.isAnError == false){
               let newData = this.dataArray.map((item) => ({ 
@@ -100,7 +100,7 @@
               }).then((result) => {
                 if (result.isConfirmed) {
                   const payload = {
-                    URL: 'adminUsers/delete/',
+                    URL: 'admin/adminUsers/delete/',
                     ID: id,
                   };
                   this.$store.dispatch('deleteData', payload)

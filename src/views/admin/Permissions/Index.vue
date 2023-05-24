@@ -49,7 +49,7 @@ export default {
   methods: {
 
     async getRoles(){
-      await this.$store.dispatch('fetchData', 'permissions/getAll')
+      await this.$store.dispatch('fetchData', 'admin/permissions/getAll')
       
         if(this.isAnError == false){
           let newData = this.dataArray.map((item) => ({ 
