@@ -47,7 +47,7 @@ export default {
   methods: {
 
     async getPlans(){
-      await this.$store.dispatch('fetchData', 'plans/list')
+      await this.$store.dispatch('fetchData', 'admin/plans/list')
       
         if(this.isAnError == false){
           let newData = this.dataArray.map((item) => ({ 
@@ -93,7 +93,7 @@ export default {
               }).then((result) => {
                 if (result.isConfirmed) {
                   const payload = {
-                    URL: 'plans/deleteOne/',
+                    URL: 'admin/plans/deleteOne/',
                     ID: id,
                   };
                   this.$store.dispatch('deleteData', payload)

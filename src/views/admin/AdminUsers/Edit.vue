@@ -119,7 +119,7 @@
     },
     methods: {
       async getAdminUsers() {
-        // await this.$store.dispatch('fetchData', 'adminUsers/list')
+        // await this.$store.dispatch('fetchData', 'admin/adminUsers/list')
 
         if (this.isAnError == false) {
 
