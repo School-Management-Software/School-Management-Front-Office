@@ -6,6 +6,7 @@ const store = createStore({
     data: null,
     isAnError: false,
     token: localStorage.getItem('token') || null,
+    user: localStorage.getItem('user') || null,
   },
   mutations: {
     SET_DATA(state, data) {
@@ -18,9 +19,11 @@ const store = createStore({
       state.isAnError = data;
 
     },
-    setToken(state, token) {
-      state.token = token;
-      localStorage.setItem('token', token);
+    setToken(state, data) {
+      state.token = data.token;
+      state.user = data.user;
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.user);
     },
     clearToken(state) {
       state.token = null;
@@ -78,11 +81,13 @@ const store = createStore({
     logout({ commit }, router) {
       commit('clearToken');
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       router.push('/auth/login');
     },
   },
   getters: {
     getData: state => state.data,
+    getProfile: state => state.user,
     isAnError: state => state.isAnError,
   },
 })

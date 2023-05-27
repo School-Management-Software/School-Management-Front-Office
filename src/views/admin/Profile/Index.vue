@@ -27,7 +27,7 @@
                       class="bg-emerald-500 active:bg-emerald-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                       type="button"
                     >
-                      Connect
+                      Edit Profile
                     </button>
                   </div>
                 </div>
@@ -37,25 +37,17 @@
                       <span
                         class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
                       >
-                        22
+                      CIN
                       </span>
-                      <span class="text-sm text-blueGray-400">Friends</span>
+                      <span class="text-sm text-blueGray-400">{{ this.getProfile.profile.cin }}</span>
                     </div>
                     <div class="mr-4 p-3 text-center">
                       <span
                         class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
                       >
-                        10
+                      Birthday
                       </span>
-                      <span class="text-sm text-blueGray-400">Photos</span>
-                    </div>
-                    <div class="lg:mr-4 p-3 text-center">
-                      <span
-                        class="text-xl font-bold block uppercase tracking-wide text-blueGray-600"
-                      >
-                        89
-                      </span>
-                      <span class="text-sm text-blueGray-400">Comments</span>
+                      <span class="text-sm text-blueGray-400">{{ this.getProfile.profile.birthday }}</span>
                     </div>
                   </div>
                 </div>
@@ -64,7 +56,7 @@
                 <h3
                   class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2"
                 >
-                  Jenna Stones
+                  {{ this.getProfile.profile.profile_language[1].first_name }} {{ this.getProfile.profile.profile_language[1].last_name }}
                 </h3>
                 <div
                   class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase"
@@ -72,19 +64,10 @@
                   <i
                     class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"
                   ></i>
-                  Los Angeles, California
+                  {{ this.getProfile.profile.profile_language[1].address }}
                 </div>
-                <div class="mb-2 text-blueGray-600 mt-10">
-                  <i
-                    class="fas fa-briefcase mr-2 text-lg text-blueGray-400"
-                  ></i>
-                  Solution Manager - Creative Tim Officer
-                </div>
-                <div class="mb-2 text-blueGray-600">
-                  <i
-                    class="fas fa-university mr-2 text-lg text-blueGray-400"
-                  ></i>
-                  University of Computer Science
+                <div class="my-5 text-blueGray-600">
+                  <span v-html="roles"></span>
                 </div>
               </div>
               <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
@@ -114,6 +97,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 
 import team2 from "@/assets/img/avatar/avatar.png";
 
@@ -123,10 +107,29 @@ export default {
   data() {
     return {
       team2,
+      data: null,
+      roles: [],
     };
   },
   components: {
   },
+  computed: {
+    ...mapGetters(['getProfile']),
+    dataArray() {
+      return [...this.getProfile];
+    },
+  },
+  mounted() {
+    this.getProfileData()
+  },
+  methods: {
+    getProfileData(){
+      this.data = this.getProfile
+      this.roles = this.getProfile.roles.map((role) => `<span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-600/20 mr-1">${role.name}</span>`),
+      console.log("this.data", this.data);
+      console.log("this.roles", this.roles);
+    }
+  }
 };
 </script>
 
