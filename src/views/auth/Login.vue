@@ -5,11 +5,16 @@
         <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-cyan-50 border-0">
           <div class="rounded-t mb-0 px-6 py-6">
             <div class="text-center mb-3">
-              <h6 class="text-blueGray-500 text-sm font-bold">
+              <h1 class="text-blueGray-500 text-xl font-bold">
                 Sign in
-              </h6>
+              </h1>
+
             </div>
             <hr class="mt-6 border-b-1 border-blueGray-300" />
+            <div v-if="error" class="text-center mt-3">
+              <FromError :error="error"/>
+            </div>
+
           </div>
           <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
             <form>
@@ -47,14 +52,20 @@
 </template>
 <script>
 import axios from 'axios'
+import FromError from "@/components/Errors/FormErrors.vue";
+
 export default {
   name: 'LoginView',
   data() {
     return {
       email: '',
       password: '',
-      rememberMe: false
+      rememberMe: false,
+      error: null,
     }
+  },
+  components: {
+    FromError,
   },
   methods: {
     async submitForm() {
@@ -68,6 +79,18 @@ export default {
       } catch (error) {
         // Handle the login error here, e.g. display an error message
         console.error(error)
+        this.error = error.response.data.message
+
+        this.$moshaToast({
+          title: 'Error',
+          description: error.response.data.message
+          },
+          {
+          timeout: 3000,
+          showIcon: 'true',
+          type: 'danger',
+          transition: 'bounce',
+        })
       }
     }
   }
