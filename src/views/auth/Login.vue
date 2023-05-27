@@ -74,22 +74,22 @@ export default {
           email: this.email,
           password: this.password
         })
-        this.$store.commit('setToken', response.data.token)
+        this.$store.commit('setToken', response.data)
         this.$router.push('/')
       } catch (error) {
-        // Handle the login error here, e.g. display an error message
-        console.error(error)
+        // show error
         this.error = error.response.data.message
 
+        // notification (Toast)
         this.$moshaToast({
-          title: 'Error',
-          description: error.response.data.message
+            title: 'Error',
+            description: error.response.data.message
           },
           {
-          timeout: 3000,
-          showIcon: 'true',
-          type: 'danger',
-          transition: 'bounce',
+            timeout: 3000,
+            showIcon: 'true',
+            type: 'danger', // 'info', 'danger', 'warning', 'success', 'default'
+            transition: 'bounce',
         })
       }
     }
