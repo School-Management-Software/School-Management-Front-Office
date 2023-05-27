@@ -9,8 +9,14 @@ import store from './vuex/store'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
+import moshaToast from 'mosha-vue-toastify'
+import 'mosha-vue-toastify/dist/style.css'
+
 const app = createApp(App)
+// sweet alert
 app.use(VueSweetalert2);
+// notice
+app.use(moshaToast)
 
 // Add axios to the app's global properties
 app.config.globalProperties.$http = axios
